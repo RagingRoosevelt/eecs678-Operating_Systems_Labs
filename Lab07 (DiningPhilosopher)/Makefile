@@ -1,7 +1,7 @@
 # Add the dp_asymmetric and dp_waiter targets to all as you implement
 # them
 #
-MY_LAST_NAME = "lastname"
+MY_LAST_NAME = "Lindsey"
 
 all: dp # dp_asymmetric dp_waiter
 
@@ -33,8 +33,8 @@ clean:
 
 tar: 
 	make clean
-	mkdir $(STUDENT_ID)-pthreads_dp-lab
-	cp Makefile dining_philosophers.c dp_asymmetric.c dp_waiter.c $(STUDENT_ID)-pthreads_dp-lab/
-	tar cvzf $(STUDENT_ID)-pthreads_dp-lab.tar.gz $(STUDENT_ID)-pthreads_dp-lab
-	rm -rf $(STUDENT_ID)-pthreads_dp-lab
+	mkdir $(MY_LAST_NAME)-pthreads_dp-lab
+	cp Makefile dining_philosophers.c dp_asymmetric.c dp_waiter.c $(MY_LAST_NAME)-pthreads_dp-lab/
+	tar cvzf $(MY_LAST_NAME)-pthreads_dp-lab.tar.gz $(MY_LAST_NAME)-pthreads_dp-lab
+	rm -rf $(MY_LAST_NAME)-pthreads_dp-lab
 
