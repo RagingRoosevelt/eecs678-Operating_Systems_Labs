@@ -27,3 +27,10 @@
 *.i*86
 *.x86_64
 *.hex
+
+# Other
+*.tar.gz
+mysock
+tags
+*~
+
