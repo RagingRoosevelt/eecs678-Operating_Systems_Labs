@@ -14,6 +14,9 @@ nolock:
 test:
 	./$(PTC) $(LOOP) $(INC)
 
+test1:
+	./$(PTC) 2000 2
+
 clean:
 	rm -f $(PTC) 
 
