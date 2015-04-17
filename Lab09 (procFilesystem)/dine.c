@@ -227,7 +227,7 @@ int check_for_deadlock()
      * 1. Store the stat filename for this diner into a buffer. Use the sprintf
      * library call.
      */
-    sprintf(filename,"/proc/%d/stat",diners[i].tid);
+    sprintf(filename,"/proc/self/task/%d/stat",diners[i].tid);
     
 
     /* 
@@ -261,9 +261,9 @@ int check_for_deadlock()
      */
     if ((new_user_time != user_time[i]) || (new_sys_time != sys_time[i])){
       user_progress[i] = new_user_time - user_time[i];
-      user_time[i] = new_user_time;
-
       sys_progress[i] = new_sys_time - sys_time[i];
+
+      user_time[i] = new_user_time;
       sys_time[i] = new_sys_time;
 
       deadlock = 0;
