@@ -54,33 +54,43 @@ int main (int argc, char *argv[])
     exit(errno);
   }
 
-  /* 
-   * 1. find size of input file 
+  /* 1. find size of input file 
    */
+  if (fstat(fdin, &statbuf) == -1){
+    printf("ERROR: Can't gather file stats");
+  }
 
-  /* 
-   * 2. go to the location corresponding to the last byte 
+  /* 2. go to the location corresponding to the last byte 
    */
+  if (lseek(fdout, statbuf.st_size-1, SEEK_SET) == -1){
+    printf("ERROR: Can't allocate the memory for the output file");
+  }
 
-  /* 
-   * 3. write a dummy byte at the last location 
+  /* 3. write a dummy byte at the last location 
    */
+  if (write(fdout, "", 1) == -1){
+    printf("ERROR: Can't write dummy byte to file");
+  }
 
-  /* 
-   * 4. mmap the input file 
+  /* 4. mmap the input file 
+   */ // Discussed on page 9
+  if ((src = mmap(NULL, statbuf.st_size, (PROT_READ), MAP_SHARED, fdin, 0)) < 0){
+    printf("ERROR: Can't perform mmap for source file");
+  }
+
+  /* 5. mmap the output file 
    */
+  if ((dst = mmap(NULL, statbuf.st_size, (PROT_READ|PROT_WRITE), MAP_SHARED, fdout , 0)) < 0){
+    printf("ERROR: Can't perform mmap for source file");
+  }
 
-  /* 
-   * 5. mmap the output file 
-   */
-
-  /* 
-   * 6. copy the input file to the output file 
+  /* 6. copy the input file to the output file 
    */
     /* Memory can be dereferenced using the * operator in C.  This line
      * stores what is in the memory location pointed to by src into
      * the memory location pointed to by dest.
      */
+    memcpy(dst,src,statbuf.st_size);
     *dst = *src;
 } 
 
